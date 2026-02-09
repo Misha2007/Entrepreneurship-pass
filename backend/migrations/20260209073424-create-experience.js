@@ -5,9 +5,9 @@ module.exports = {
     await queryInterface.createTable("Experiences", {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.uuidv4,
       },
       type: {
         type: Sequelize.ENUM({
@@ -38,7 +38,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       userId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.UUID,
         allowNull: false,
         references: {
           model: "Users",

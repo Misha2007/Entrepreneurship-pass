@@ -2,40 +2,32 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("Users", {
+    await queryInterface.createTable("Experiencepassports", {
       id: {
         allowNull: false,
+        type: Sequelize.UUID,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.uuidv4,
       },
-      firstName: {
-        type: Sequelize.STRING,
-      },
-      lastName: {
-        type: Sequelize.STRING,
-      },
-      email: {
-        type: Sequelize.STRING,
-      },
-      birth: {
-        type: Sequelize.DATE,
-      },
-      phone: {
-        type: Sequelize.STRING,
-      },
-      countryId: {
+      exp_id: {
         type: Sequelize.UUID,
         allowNull: false,
         references: {
-          model: "Countries",
+          model: "Experiences",
           key: "id",
         },
         onUpdate: "CASCADE",
         onDelete: "RESTRICT",
       },
-      residency: {
-        type: Sequelize.STRING,
+      pass_id: {
+        type: Sequelize.UUID,
+        allowNull: false,
+        references: {
+          model: "Passports",
+          key: "id",
+        },
+        onUpdate: "CASCADE",
+        onDelete: "RESTRICT",
       },
       createdAt: {
         allowNull: false,
@@ -48,6 +40,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("Users");
+    await queryInterface.dropTable("Experiencepassports");
   },
 };
