@@ -8,8 +8,8 @@ const SignUp = (props) => {
   const firstNameInputRef = useRef();
   const lastNameInputRef = useRef();
   const emailInputRef = useRef();
+  const birthInputRef = useRef();
   const passwordInputRef = useRef();
-  const passwordConfInputRef = useRef();
 
   const errorHandler = () => {
     setError(null);
@@ -18,27 +18,27 @@ const SignUp = (props) => {
   const saveUserDataHandler = (enteredUserData) => {
     const userData = {
       ...enteredUserData,
-      id: Math.random().toString(),
     };
     props.onAddUser(userData);
   };
 
   const sumbitHandler = (event) => {
+    event.preventDefault();
+    console.log("sjadlkjasdsajd");
     const enteredFirstName = firstNameInputRef.current.value;
     const enteredLastName = lastNameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
+    const enteredBirth = birthInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-    const enteredPasswordConf = passwordConfInputRef.current.value;
     event.preventDefault();
 
     if (
       enteredFirstName.trim().length == 0 ||
+      enteredLastName.trim().length == 0 ||
       enteredEmail.trim().length == 0 ||
-      enteredPassword.trim().length == 0 ||
-      enteredPasswordConf.trim().length == 0
+      enteredBirth.trim().length == 0 ||
+      enteredPassword.trim().length == 0
     ) {
-      console.log(enteredPasswordConf);
-      console.log(enteredPassword);
       setError({
         title: "Invalid input",
         message:
@@ -47,16 +47,10 @@ const SignUp = (props) => {
       return;
     }
 
-    if (enteredPasswordConf != enteredPassword) {
-      setError({
-        title: "Invalid input",
-        message: "Your passwords are not matching. Please try again.",
-      });
-      return;
-    }
-
     const userData = {
       firstName: enteredFirstName,
+      lastName: enteredLastName,
+      birth: enteredBirth,
       email: enteredEmail,
       password: enteredPassword,
     };
@@ -65,8 +59,8 @@ const SignUp = (props) => {
     firstNameInputRef.current.value = "";
     lastNameInputRef.current.value = "";
     emailInputRef.current.value = "";
+    birthInputRef.current.value = "";
     passwordInputRef.current.value = "";
-    passwordConfInputRef.current.value = "";
   };
 
   return (
@@ -117,7 +111,7 @@ const SignUp = (props) => {
                 name="birth"
                 placeholder="pp/kk/aaaa"
                 required
-                ref={firstNameInputRef}
+                ref={birthInputRef}
               />
             </div>
 
@@ -138,6 +132,7 @@ const SignUp = (props) => {
               <label htmlFor="password">Parool</label>
 
               <input
+                type="password"
                 id="password"
                 name="password"
                 placeholder="Parool"

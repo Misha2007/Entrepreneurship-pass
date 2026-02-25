@@ -1,12 +1,16 @@
 import * as bcrypt from "bcrypt";
-import User from "../models/user.js";
+import db from "../models/index.js";
+
 import jwt from "jsonwebtoken";
 import authConfig from "../config/auth.config.js";
 import "../util/db.js";
 
+const { User } = db;
+
 class userController {
   createUser(req, res) {
     const saltRounds = 10;
+    console.log("Received user data:", req.body);
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
     const birth = req.body.birth;
@@ -15,12 +19,8 @@ class userController {
 
     console.log(req.body.role);
 
-    if (!name || !email || !password) {
+    if (!firstName || !lastName || !birth || !email || !password) {
       return res.status(400).json({ message: "Fill all required fields" });
-    }
-
-    if (req.user && req.user.role !== "admin" && role !== "client") {
-      return res.status(403).json({ message: "Only admins can assign roles" });
     }
 
     bcrypt.genSalt(saltRounds, (err, salt) => {
@@ -111,4 +111,4 @@ class userController {
   }
 }
 
-export default new userController();
+export const UserController = new userController();

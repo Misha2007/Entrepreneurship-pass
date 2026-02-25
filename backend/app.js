@@ -1,22 +1,28 @@
-const express = require("express");
+import userRoutes from "./routes/user.js";
+
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import "./util/db.js";
+import bodyParser from "body-parser";
+
 const PORT = 3001;
-const cors = require("cors");
-const cookieParser = require("cookie-parser");
-require("./util/db");
-require("dotenv").config();
+dotenv.config();
 
 const app = express();
+app.use(bodyParser.json());
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: "*",
     methods: ["GET", "POST", "PATCH"],
-    credentials: true,
   }),
 );
 
 app.get("/", (req, res) => {
   res.send("Server is running!");
 });
+
+app.use("/users", userRoutes);
 
 app.listen(PORT, (error) => {
   if (!error)
