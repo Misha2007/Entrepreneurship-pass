@@ -16,10 +16,35 @@ module.exports = (sequelize, DataTypes) => {
   }
   User.init(
     {
-      firstName: DataTypes.STRING,
-      lastName: DataTypes.STRING,
-      email: DataTypes.STRING,
-      birth: DataTypes.DATE,
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      email: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        unique: true,
+        validate: {
+          isEmail: true,
+        },
+      },
+      birth: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.CHAR(60),
+        allowNull: false,
+      },
+      status: {
+        type: DataTypes.ENUM("created", "confirmed", "deleted", "banned"),
+        allowNull: false,
+        defaultValue: "created",
+      },
       phone: DataTypes.STRING,
       countryId: {
         type: DataTypes.INTEGER,
