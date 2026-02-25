@@ -1,0 +1,68 @@
+
+
+.whatever {
+    width: 100%;
+
+}
+
+.image-wrapper {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin-top: 80px; /* same as .blacktab height */
+}
+
+.groupimg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;          
+    object-position: center;    
+    display: block;             
+}
+
+.blacktab {
+    background-color: black;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    position: absolute;
+}
+
+.whitetab {
+    background: white;
+    color: black;
+    padding: 20px 40px;
+    width: 75%;
+    height: 15%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
+    border-radius: 8px;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.login {
+    padding: 8px 16px;
+    cursor: pointer;
+    background-color: black;
+    color: white;
+
+}
+
+.register {
+    padding: 8px 16px;
+    cursor: pointer;
+    color: black;
+    background-color: white;
+    border-color: black;
+}
+
