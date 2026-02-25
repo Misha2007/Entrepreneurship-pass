@@ -1,26 +1,18 @@
-// import "./SignUp.css";
+import "./SignUp.css";
 import { useState, useRef } from "react";
+import { FaXmark } from "react-icons/fa6";
 
 const SignUp = (props) => {
   const [error, setError] = useState(null);
 
   const firstNameInputRef = useRef();
+  const lastNameInputRef = useRef();
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
   const passwordConfInputRef = useRef();
-  const [rememberMe, setRememberMe] = useState(false);
-  const [showPassword, setShowPassword] = useState(false);
 
   const errorHandler = () => {
     setError(null);
-  };
-
-  const togglePasswordVisibility = () => {
-    setShowPassword((prev) => !prev);
-  };
-
-  const toggleRememberMe = () => {
-    setRememberMe((prev) => !prev);
   };
 
   const saveUserDataHandler = (enteredUserData) => {
@@ -33,10 +25,10 @@ const SignUp = (props) => {
 
   const sumbitHandler = (event) => {
     const enteredFirstName = firstNameInputRef.current.value;
+    const enteredLastName = lastNameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
     const enteredPasswordConf = passwordConfInputRef.current.value;
-    const rememberMeValue = rememberMe;
     event.preventDefault();
 
     if (
@@ -71,91 +63,95 @@ const SignUp = (props) => {
 
     saveUserDataHandler(userData);
     firstNameInputRef.current.value = "";
+    lastNameInputRef.current.value = "";
     emailInputRef.current.value = "";
     passwordInputRef.current.value = "";
     passwordConfInputRef.current.value = "";
   };
 
   return (
-    <form onSubmit={sumbitHandler}>
-      <div className="form-group">
-        <div className="input-container">
-          <input
-            type="text"
-            id="firstName"
-            name="firstName"
-            placeholder="Eesnimi"
-            required
-            ref={firstNameInputRef}
-          />
-          <label htmlFor="firstName">Eesnimi</label>
+    <div class="signup-modal">
+      <div className="signup-modal-content">
+        <div className="signup-header">
+          <h1>ETTEVÕTLIKKUSE PASS</h1>
+          <FaXmark size={40} color="#000" />
         </div>
+        <form onSubmit={sumbitHandler}>
+          <div className="form-group">
+            <h2>Registreeri</h2>
 
-        <div className="input-container">
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            placeholder="Perekonnanimi"
-            required
-            ref={firstNameInputRef}
-          />
-          <label htmlFor="lastName">Perekonnanimi</label>
-        </div>
+            <div style={{ display: "flex", gap: "1rem" }}>
+              <div className="input-container">
+                <label htmlFor="firstName">Eesnimi</label>
 
-        <div className="input-container">
-          <input
-            type="text"
-            id="birth"
-            name="birth"
-            placeholder="pp/kk/aaaa"
-            required
-            ref={firstNameInputRef}
-          />
-          <label htmlFor="birth">Sünniaeg</label>
-        </div>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  placeholder="Eesnimi"
+                  required
+                  ref={firstNameInputRef}
+                />
+              </div>
 
-        <div className="input-container">
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="email"
-            required
-            ref={emailInputRef}
-          />
-          <label htmlFor="email">Email</label>
-        </div>
+              <div className="input-container">
+                <label htmlFor="lastName">Perekonnanimi</label>
 
-        <div className="input-container">
-          <input
-            type={showPassword ? "text" : "password"}
-            id="password"
-            name="password"
-            placeholder="Parool"
-            required
-            ref={passwordInputRef}
-          />
-          <label htmlFor="password">Parool</label>
-        </div>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  placeholder="Perekonnanimi"
+                  required
+                  ref={lastNameInputRef}
+                />
+              </div>
+            </div>
 
-        <div className="remember-container">
-          <div>
-            <input
-              type="checkbox"
-              id="remember_me"
-              name="remember_me"
-              onClick={toggleRememberMe}
-            />
-            <label htmlFor="remember_me">Remember me</label>
+            <div className="input-container">
+              <label htmlFor="birth">Sünniaeg</label>
+
+              <input
+                type="date"
+                id="birth"
+                name="birth"
+                placeholder="pp/kk/aaaa"
+                required
+                ref={firstNameInputRef}
+              />
+            </div>
+
+            <div className="input-container">
+              <label htmlFor="email">Email</label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="email"
+                required
+                ref={emailInputRef}
+              />
+            </div>
+
+            <div className="input-container">
+              <label htmlFor="password">Parool</label>
+
+              <input
+                id="password"
+                name="password"
+                placeholder="Parool"
+                required
+                ref={passwordInputRef}
+              />
+            </div>
           </div>
-        </div>
-
-        <button type="submit" className="login_button">
-          Login
-        </button>
+          <button type="submit" className="signupbtn">
+            Registreeri
+          </button>
+        </form>
       </div>
-    </form>
+    </div>
   );
 };
 
