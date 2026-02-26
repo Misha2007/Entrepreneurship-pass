@@ -1,11 +1,9 @@
 import * as bcrypt from "bcrypt";
-import db from "../models/index.js";
 
 import jwt from "jsonwebtoken";
 import authConfig from "../config/auth.config.js";
 import "../util/db.js";
-
-const { User } = db;
+import User from "../models/user.js";
 
 class userController {
   createUser(req, res) {
@@ -16,8 +14,6 @@ class userController {
     const birth = req.body.birth;
     const email = req.body.email;
     const password = req.body.password;
-
-    console.log(req.body.role);
 
     if (!firstName || !lastName || !birth || !email || !password) {
       return res.status(400).json({ message: "Fill all required fields" });
@@ -86,7 +82,7 @@ class userController {
         }
 
         const token = jwt.sign(
-          { clientId: newUser.clientId, role: newUser.role },
+          { clientId: newUser.clientId },
           authConfig.secret,
 
           { expiresIn: "2h" },

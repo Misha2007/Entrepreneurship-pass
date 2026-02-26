@@ -7,7 +7,7 @@ module.exports = {
         allowNull: false,
         primaryKey: true,
         type: Sequelize.UUID,
-        defaultValue: Sequelize.uuidv4,
+        defaultValue: Sequelize.fn("uuid_generate_v4"),
       },
       type: {
         type: Sequelize.ENUM({
