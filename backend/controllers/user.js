@@ -1,9 +1,11 @@
 import * as bcrypt from "bcrypt";
-
+import db from "../models/index.js";
+import { account } from './appwrite'
 import jwt from "jsonwebtoken";
 import authConfig from "../config/auth.config.js";
 import "../util/db.js";
 import User from "../models/user.js";
+
 
 class userController {
   createUser(req, res) {

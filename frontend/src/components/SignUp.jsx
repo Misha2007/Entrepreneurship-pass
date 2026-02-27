@@ -144,6 +144,9 @@ const SignUp = (props) => {
           <button type="submit" className="signupbtn">
             Registreeri
           </button>
+          <div id="login-screen" className="hidden">
+            <button id="login-btn">Login with Google</button>
+          </div>
         </form>
       </div>
     </div>
