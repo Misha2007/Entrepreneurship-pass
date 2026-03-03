@@ -12,8 +12,8 @@ function Home() {
   const [isLogin, setIsLogin] = useState(false);
   const [isSingup, setIsSingup] = useState(false);
   useEffect(() => {
-    console.log(isSingup);
-  }, [isSingup]);
+    console.log(isLogin);
+  }, [isLogin]);
 
   const closeModal = () => {
     setIsSingup(false);
@@ -21,12 +21,27 @@ function Home() {
   };
   return (
     <div className="whatever">
-      {isSingup && <AuthWrapper closeModal={closeModal} />}
+      {(isSingup || isLogin) && (
+        <AuthWrapper
+          closeModal={closeModal}
+          isLogin={isLogin}
+          isSingup={isSingup}
+          setIsSingup={setIsSingup}
+          setIsLogin={setIsLogin}
+        />
+      )}
       <div className="blacktab">
         <div className="whitetab">
           <span className="title">ETTEVÕTLIKKUSE PASS</span>
           <div className="buttons">
-            <button className="login">Logi sisse</button>
+            <button
+              className="login"
+              onClick={() => {
+                setIsLogin(true);
+              }}
+            >
+              Logi sisse
+            </button>
             <button
               className="register"
               onClick={() => {

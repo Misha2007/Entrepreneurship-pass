@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { FaXmark } from "react-icons/fa6";
 import SignUp from "./SignUp";
 import { useNavigate } from "react-router-dom";
+import SignIn from "./SignIn";
 
 const { VITE_API_URL } = import.meta.env;
 
@@ -63,7 +64,16 @@ const AuthWrapper = (props) => {
           <h1>ETTEVÕTLIKKUSE PASS</h1>
           <FaXmark size={40} color="#000" />
         </div>
-        <SignUp onAddUser={addUserHandler} closeModal={props.closeModal} />
+        {props.isLogin && (
+          <SignIn
+            closeModal={props.closeModal}
+            setIsSingup={props.setIsSingup}
+            setIsLogin={props.setIsLogin}
+          />
+        )}
+        {props.isSingup && (
+          <SignUp onAddUser={addUserHandler} closeModal={props.closeModal} />
+        )}
       </div>
     </div>
   );

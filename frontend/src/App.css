@@ -38,3 +38,10 @@
 .read-the-docs {
   color: #888;
 }
+
+.flexCentered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
