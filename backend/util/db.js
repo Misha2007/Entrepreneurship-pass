@@ -1,15 +1,17 @@
-const { Sequelize } = require("sequelize");
-require("dotenv").config();
+import dotenv from "dotenv";
+dotenv.config();
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialect: "postgres",
-});
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log("Database connected successfully!");
-  })
-  .catch((err) => {
-    console.error("Database connection error:", err);
-  });
-module.exports = sequelize;
+import { Sequelize } from "sequelize";
+
+const sequelize = new Sequelize(
+  process.env.DATABASE_NAME,
+  process.env.DATABASE_USER,
+  process.env.DATABASE_PASSWORD,
+  {
+    host: process.env.DATABASE_HOST,
+    port: process.env.DB_PORT,
+    dialect: process.env.DATABASE_DIALECT,
+  },
+);
+
+export default sequelize;

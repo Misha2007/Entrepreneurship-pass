@@ -64,11 +64,16 @@ const SignUp = (props) => {
   };
 
   return (
-    <div class="signup-modal">
+    <div className="signup-modal">
       <div className="signup-modal-content">
         <div className="signup-header">
           <h1>ETTEVÕTLIKKUSE PASS</h1>
-          <FaXmark size={40} color="#000" />
+          <FaXmark
+            size={40}
+            color="#000"
+            onClick={props.closeModal}
+            style={{ cursor: "pointer" }}
+          />
         </div>
         <form onSubmit={sumbitHandler}>
           <div className="form-group">

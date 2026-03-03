@@ -57,13 +57,13 @@ const AuthWrapper = (props) => {
   };
 
   return (
-    <div class="signup-modal">
+    <div className="signup-modal">
       <div className="signup-modal-content">
         <div className="signup-header">
           <h1>ETTEVÕTLIKKUSE PASS</h1>
           <FaXmark size={40} color="#000" />
         </div>
-        <SignUp onAddUser={addUserHandler} />
+        <SignUp onAddUser={addUserHandler} closeModal={props.closeModal} />
       </div>
     </div>
   );

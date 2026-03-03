@@ -1,68 +1,226 @@
-
-
 .whatever {
-    width: 100%;
-
+  width: 100%;
 }
 
 .image-wrapper {
-    width: 100%;
-    overflow: hidden;
-    position: relative;
-    margin-top: 80px; /* same as .blacktab height */
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+  margin-top: 80px; /* same as .blacktab height */
 }
 
 .groupimg {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;          
-    object-position: center;    
-    display: block;             
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
 }
 
 .blacktab {
-    background-color: black;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    position: absolute;
+  background-color: black;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  position: absolute;
 }
 
 .whitetab {
-    background: white;
-    color: black;
-    padding: 20px 40px;
-    width: 75%;
-    height: 15%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;  
-    border-radius: 8px;
+  background: white;
+  color: black;
+  padding: 20px 40px;
+  width: 75%;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
 }
 
 .buttons {
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 15px;
 }
 
 .login {
-    padding: 8px 16px;
-    cursor: pointer;
-    background-color: black;
-    color: white;
-
+  padding: 8px 16px;
+  cursor: pointer;
+  background-color: black;
+  color: white;
 }
 
 .register {
-    padding: 8px 16px;
-    cursor: pointer;
-    color: black;
-    background-color: white;
-    border-color: black;
+  padding: 8px 16px;
+  cursor: pointer;
+  color: black;
+  background-color: white;
+  border-color: black;
 }
 
+.icons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 55px 154px;
+}
+
+.icons p {
+  color: #000;
+  font-family: Roboto;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+#main-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000;
+  padding: 100px 227px;
+  gap: 50px;
+}
+
+#main-part h1 {
+  font-family: "Playfair Display";
+  font-size: 48px;
+  font-style: normal;
+  font-weight: 800;
+  line-height: normal;
+
+  span {
+    color: #ffff01;
+  }
+}
+.c {
+  background-image: url("/assets/pictures/frame1.png");
+
+  background-repeat: no-repeat;
+  background-position: top left;
+  background-size: 100% 100%;
+
+  padding: 100px;
+
+  max-width: 1400px;
+  width: 100%;
+}
+
+#partners {
+  background-image: url("/assets/pictures/Frame2.png");
+}
+
+#avasta {
+  background-image: url("/assets/pictures/Frame3.png");
+  max-width: 800px;
+  padding: 40px 100px;
+
+  h2 {
+    color: #111;
+    text-align: center;
+    font-family: Inter;
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .container {
+    padding: 0;
+    background: transparent;
+  }
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: #000;
+  text-align: left;
+  padding: 70px 63px 0 63px;
+  border-radius: 55px;
+
+  h2 {
+    font-family: "Playfair Display";
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 34px;
+
+    li {
+      font-family: Roboto;
+      font-size: 29px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+
+      svg {
+        width: 25px;
+        height: 25px;
+        margin-right: 20px;
+        padding: 20px;
+        border-radius: 50%;
+        border: 2px solid transparent;
+
+        background:
+          linear-gradient(#eef8fa, #eef8fa) padding-box,
+          linear-gradient(180deg, #4db8c4 0%, #b1f4fb 100%) border-box;
+      }
+    }
+  }
+
+  div {
+    display: flex;
+    margin-top: 20px;
+    position: relative;
+    justify-content: space-between;
+
+    img {
+      width: 500px;
+      height: auto;
+      object-fit: cover;
+      object-position: center;
+      border-radius: 8px;
+    }
+  }
+}
+
+.register-avasta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    border-radius: 8px;
+    border: 1px solid #000;
+    background: #000;
+    color: #fff;
+    margin: 0 auto;
+    padding: 16px 24px;
+    gap: 10px;
+  }
+}
+
+#partners-images img {
+  width: auto;
+  margin-top: 76px;
+  margin-bottom: 76px;
+}
