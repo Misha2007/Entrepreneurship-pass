@@ -1,0 +1,10 @@
+#header-auth {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 34px 60px;
+
+  .buttons {
+    align-items: center;
+  }
+}

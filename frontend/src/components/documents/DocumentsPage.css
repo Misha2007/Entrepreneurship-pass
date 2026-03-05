@@ -1,0 +1,29 @@
+.documents-container {
+  h1 {
+    text-align: left;
+  }
+
+  padding: 0 110px 70px 110px;
+}
+
+.documents {
+  display: flex;
+  flex-wrap: wrap;
+
+  .create {
+    background: rgba(98, 229, 244, 0.2);
+    svg {
+      width: 60px;
+      height: 60px;
+    }
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 424px;
+    height: 267px;
+  }
+}

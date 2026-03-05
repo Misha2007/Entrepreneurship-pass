@@ -40,14 +40,16 @@
   border-radius: 23px 0;
   background: #1e1e1e;
   padding: 16px 32px;
+  width: 100%;
+}
 
+.logo {
   color: #fff;
   font-family: Inter;
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  width: 100%;
   margin: 0;
 }
 
@@ -95,6 +97,15 @@
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
+  line-height: normal;
+}
+
+.robot18 {
+  text-edge: cap;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
   line-height: normal;
 }
 

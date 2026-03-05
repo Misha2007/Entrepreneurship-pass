@@ -67,7 +67,7 @@ const SignUp = (props) => {
     <div className="signup-modal">
       <div className="signup-modal-content">
         <div className="signup-header">
-          <h1>ETTEVÕTLIKKUSE PASS</h1>
+          <h1 className="logo">ETTEVÕTLIKKUSE PASS</h1>
           <FaXmark
             size={40}
             color="#000"
