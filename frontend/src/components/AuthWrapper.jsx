@@ -27,7 +27,6 @@ const AuthWrapper = (props) => {
   const addUserHandler = (user) => {
     const addUser = async (user) => {
       try {
-        console.log(JSON.stringify(user));
         const response = await fetch(`${VITE_API_URL}users/new-user`, {
           method: "POST",
           body: JSON.stringify(user),
@@ -57,6 +56,41 @@ const AuthWrapper = (props) => {
     addUser(user);
   };
 
+  const loginUserHandler = (user) => {
+    const getUser = async (user) => {
+      try {
+        const response = await fetch(`${VITE_API_URL}users/login`, {
+          method: "POST",
+          body: JSON.stringify(user),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        localStorage.setItem("authToken", data.accessToken);
+
+        if (!response.ok) {
+          const errorMessage = await response.text();
+          console.log(errorMessage);
+
+          setError({
+            title: "An error occurred",
+            message: errorMessage || "Invalid email or password.",
+          });
+          return;
+        }
+        navigate("/account");
+      } catch (error) {
+        console.log(error);
+        setError({
+          title: "Server Unreachable",
+          message: "Failed to add user, please try again later.",
+        });
+      }
+    };
+    getUser(user);
+  };
+
   return (
     <div className="signup-modal">
       <div className="signup-modal-content">
@@ -69,6 +103,7 @@ const AuthWrapper = (props) => {
             closeModal={props.closeModal}
             setIsSingup={props.setIsSingup}
             setIsLogin={props.setIsLogin}
+            onLoginUser={loginUserHandler}
           />
         )}
         {props.isSingup && (

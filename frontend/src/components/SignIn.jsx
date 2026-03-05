@@ -5,10 +5,7 @@ import { FaXmark } from "react-icons/fa6";
 const SignIn = (props) => {
   const [error, setError] = useState(null);
 
-  const firstNameInputRef = useRef();
-  const lastNameInputRef = useRef();
   const emailInputRef = useRef();
-  const birthInputRef = useRef();
   const passwordInputRef = useRef();
 
   const errorHandler = () => {
@@ -19,26 +16,16 @@ const SignIn = (props) => {
     const userData = {
       ...enteredUserData,
     };
-    props.onAddUser(userData);
+    props.onLoginUser(userData);
   };
 
   const sumbitHandler = (event) => {
     event.preventDefault();
-    console.log("sjadlkjasdsajd");
-    const enteredFirstName = firstNameInputRef.current.value;
-    const enteredLastName = lastNameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
-    const enteredBirth = birthInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
     event.preventDefault();
 
-    if (
-      enteredFirstName.trim().length == 0 ||
-      enteredLastName.trim().length == 0 ||
-      enteredEmail.trim().length == 0 ||
-      enteredBirth.trim().length == 0 ||
-      enteredPassword.trim().length == 0
-    ) {
+    if (enteredEmail.trim().length == 0 || enteredPassword.trim().length == 0) {
       setError({
         title: "Invalid input",
         message:
@@ -48,18 +35,12 @@ const SignIn = (props) => {
     }
 
     const userData = {
-      firstName: enteredFirstName,
-      lastName: enteredLastName,
-      birth: enteredBirth,
       email: enteredEmail,
       password: enteredPassword,
     };
 
     saveUserDataHandler(userData);
-    firstNameInputRef.current.value = "";
-    lastNameInputRef.current.value = "";
     emailInputRef.current.value = "";
-    birthInputRef.current.value = "";
     passwordInputRef.current.value = "";
   };
 

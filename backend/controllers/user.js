@@ -41,6 +41,8 @@ class userController {
               expiresIn: "2h",
             });
 
+            console.log(hash);
+
             res.status(201).json({
               message: "Created new user",
               newUser: newUser,
@@ -75,34 +77,46 @@ class userController {
       const storedHashedPassword = newUser.password;
       const userInputPassword = req.body.password;
 
-      bcrypt.compare(userInputPassword, storedHashedPassword, (err, result) => {
-        if (err) {
-          console.error("Error comparing passwords: ", err);
-          return;
-        }
+      bcrypt.compare(
+        userInputPassword,
+        storedHashedPassword,
+        async (err, result) => {
+          if (err) {
+            console.error("Error comparing passwords: ", err);
+            return;
+          }
 
-        const token = jwt.sign(
-          { clientId: newUser.clientId },
-          authConfig.secret,
+          console.log("INPUT PASSWORD:", JSON.stringify(userInputPassword));
+          console.log("HASH FROM DB:", JSON.stringify(storedHashedPassword));
+          console.log("INPUT LENGTH:", userInputPassword.length);
+          console.log("HASH LENGTH:", storedHashedPassword.length);
 
-          { expiresIn: "2h" },
-        );
+          const token = jwt.sign(
+            { userId: newUser.id },
+            authConfig.secret,
 
-        console.log("login user token", newUser.clientId);
-
-        if (result) {
-          console.log(
-            `[Server]: ${newUser.firstName} (${newUser.lastName}) logged in`,
+            { expiresIn: "2h" },
           );
-          return res.json({
-            user: newUser,
-            accessToken: token,
-          });
-        } else {
-          console.log("[Server]: Passwords do not match! Auth failed.");
-          res.status(401).send("Invalid credentials");
-        }
-      });
+
+          console.log("login user token", newUser.id);
+
+          if (result) {
+            console.log(
+              `[Server]: ${newUser.firstName} (${newUser.lastName}) logged in`,
+            );
+            return res.json({
+              user: newUser,
+              accessToken: token,
+            });
+          } else {
+            console.log(result);
+            console.log(token);
+            console.log(userInputPassword.length, storedHashedPassword);
+            console.log("[Server]: Passwords do not match! Auth failed.");
+            res.status(401).send("Invalid credentials");
+          }
+        },
+      );
     });
   }
 }
