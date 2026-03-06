@@ -7,7 +7,7 @@ const Header = (props) => {
       <span className="logo">ETTEVÕTLIKKUSE PASS</span>
       <div className="buttons">
         <img src="/assets/pictures/profileImage.png" alt="" />
-        <span>Tere, Mari</span>
+        <span className="robot18">Tere, Mari</span>
         <FaChevronDown />
       </div>
     </div>

@@ -48,9 +48,66 @@ const DocumentsPage = (props) => {
     <div className="documents-container">
       <h1>Dokumendid</h1>
       <div className="documents">
-        <div className="create">
+        <div className="doc desc create">
           <FiPlusCircle />
-          <p>Lisa uus kogemus</p>
+          <p className="logo" style={{ color: "#000" }}>
+            Lisa uus kogemus
+          </p>
+        </div>
+        <div className="doc">
+          <div className="status">
+            <img src="/assets/icons/tickPink.svg" alt="" />
+            <span className="robot16">OOTAB KINNITUST</span>
+          </div>
+          <div className="desc">
+            <p className="title logo">Vabatahtlik töö</p>
+            <button>Vaata rohkem</button>
+            <hr />
+          </div>
+        </div>
+        <div className="doc">
+          <div className="status">
+            <img src="/assets/icons/tickPink.svg" alt="" />
+            <span className="robot16">OOTAB KINNITUST</span>
+          </div>
+          <div className="desc">
+            <p className="title logo">Vabatahtlik töö</p>
+            <button>Vaata rohkem</button>
+            <hr />
+          </div>
+        </div>
+        <div className="doc">
+          <div className="status">
+            <img src="/assets/icons/tickPink.svg" alt="" />
+            <span className="robot16">OOTAB KINNITUST</span>
+          </div>
+          <div className="desc">
+            <p className="title logo">Vabatahtlik töö</p>
+            <button>Vaata rohkem</button>
+            <hr />
+          </div>
+        </div>
+        <div className="doc">
+          <div className="status">
+            <img src="/assets/icons/tickPink.svg" alt="" />
+            <span className="robot16">OOTAB KINNITUST</span>
+          </div>
+          <div className="desc">
+            <p className="title logo">Vabatahtlik töö</p>
+            <button>Vaata rohkem</button>
+            <hr />
+          </div>
+        </div>
+        <div className="doc">
+          <div className="status">
+            <img src="/assets/icons/tickPink.svg" alt="" />
+            <span className="robot16">OOTAB KINNITUST</span>
+          </div>
+          <div className="desc">
+            <p className="title logo">Vabatahtlik töö</p>
+            <button>Vaata rohkem</button>
+            <hr />
+          </div>
         </div>
       </div>
     </div>
