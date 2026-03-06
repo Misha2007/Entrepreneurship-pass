@@ -2,13 +2,10 @@ import "./SignUp.css";
 import { useState, useRef } from "react";
 import { FaXmark } from "react-icons/fa6";
 
-const SignUp = (props) => {
+const SignIn = (props) => {
   const [error, setError] = useState(null);
 
-  const firstNameInputRef = useRef();
-  const lastNameInputRef = useRef();
   const emailInputRef = useRef();
-  const birthInputRef = useRef();
   const passwordInputRef = useRef();
 
   const errorHandler = () => {
@@ -19,26 +16,16 @@ const SignUp = (props) => {
     const userData = {
       ...enteredUserData,
     };
-    props.onAddUser(userData);
+    props.onLoginUser(userData);
   };
 
   const sumbitHandler = (event) => {
     event.preventDefault();
-    console.log("sjadlkjasdsajd");
-    const enteredFirstName = firstNameInputRef.current.value;
-    const enteredLastName = lastNameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
-    const enteredBirth = birthInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
     event.preventDefault();
 
-    if (
-      enteredFirstName.trim().length == 0 ||
-      enteredLastName.trim().length == 0 ||
-      enteredEmail.trim().length == 0 ||
-      enteredBirth.trim().length == 0 ||
-      enteredPassword.trim().length == 0
-    ) {
+    if (enteredEmail.trim().length == 0 || enteredPassword.trim().length == 0) {
       setError({
         title: "Invalid input",
         message:
@@ -48,18 +35,12 @@ const SignUp = (props) => {
     }
 
     const userData = {
-      firstName: enteredFirstName,
-      lastName: enteredLastName,
-      birth: enteredBirth,
       email: enteredEmail,
       password: enteredPassword,
     };
 
     saveUserDataHandler(userData);
-    firstNameInputRef.current.value = "";
-    lastNameInputRef.current.value = "";
     emailInputRef.current.value = "";
-    birthInputRef.current.value = "";
     passwordInputRef.current.value = "";
   };
 
@@ -77,53 +58,13 @@ const SignUp = (props) => {
         </div>
         <form onSubmit={sumbitHandler}>
           <div className="form-group">
-            <h2>Registreeri</h2>
-
-            <div style={{ display: "flex", gap: "1rem" }}>
-              <div className="input-container" style={{ width: "100%" }}>
-                <label htmlFor="firstName">Eesnimi</label>
-
-                <input
-                  type="text"
-                  id="firstName"
-                  name="firstName"
-                  placeholder="Eesnimi"
-                  required
-                  ref={firstNameInputRef}
-                />
-              </div>
-
-              <div className="input-container" style={{ width: "100%" }}>
-                <label htmlFor="lastName">Perekonnanimi</label>
-
-                <input
-                  type="text"
-                  id="lastName"
-                  name="lastName"
-                  placeholder="Perekonnanimi"
-                  required
-                  ref={lastNameInputRef}
-                />
-              </div>
-            </div>
-
-            <div className="input-container">
-              <label htmlFor="birth">Sünniaeg</label>
-
-              <input
-                type="date"
-                id="birth"
-                name="birth"
-                placeholder="pp/kk/aaaa"
-                required
-                ref={birthInputRef}
-              />
-            </div>
+            <h2>Logi sisse</h2>
 
             <div className="input-container">
               <label htmlFor="email">Email</label>
 
               <input
+                className="robot20"
                 type="email"
                 id="email"
                 name="email"
@@ -137,6 +78,7 @@ const SignUp = (props) => {
               <label htmlFor="password">Parool</label>
 
               <input
+                className="robot20"
                 type="password"
                 id="password"
                 name="password"
@@ -147,12 +89,37 @@ const SignUp = (props) => {
             </div>
           </div>
           <button type="submit" className="signupbtn">
-            Registreeri
+            Logi sisse
           </button>
         </form>
+        <div
+          className="flexCentered robot20"
+          style={{ color: "#000", fontWeight: "bold" }}
+        >
+          <p>Voi</p>
+          <div style={{ gap: "32px", display: "flex" }}>
+            <img src="/assets/pictures/google.png" alt="" />
+            <img src="/assets/pictures/smartId.png" alt="" />
+            <img src="/assets/pictures/mobId.png" alt="" />
+          </div>
+          <p>Pole veel kasutaja?</p>
+          <p>
+            Registreeri end{" "}
+            <a
+              href="#"
+              style={{ fontWeight: "lighter" }}
+              onClick={() => {
+                props.setIsLogin(false);
+                props.setIsSingup(true);
+              }}
+            >
+              siin.
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
-export default SignUp;
+export default SignIn;

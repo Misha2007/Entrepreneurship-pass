@@ -1,10 +1,9 @@
-import userRoutes from "./routes/user.js";
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import "./util/db.js";
 import bodyParser from "body-parser";
+import userRoutes from "./routes/user.js";
 
 const PORT = 3001;
 dotenv.config();

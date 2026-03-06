@@ -19,7 +19,7 @@ module.exports = {
       allowNull: false,
     });
     await queryInterface.addColumn("Users", "password", {
-      type: Sequelize.CHAR,
+      type: Sequelize.STRING(60),
       allowNull: false,
     });
     await queryInterface.addColumn("Users", "status", {
