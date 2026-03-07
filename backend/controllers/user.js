@@ -1,11 +1,36 @@
 import * as bcrypt from "bcrypt";
 import db from "../models/index.js";
-import { account } from './appwrite'
+import { account } from '../controllers/user.js'
 import jwt from "jsonwebtoken";
 import authConfig from "../config/auth.config.js";
 import "../util/db.js";
 import User from "../models/user.js";
 
+
+
+const account = new sdk.Account(client);
+const user = await account.get();
+
+
+async function handleLogin () {
+  account.createOAuth2Session(
+    'google',
+    'http://localhost:5173/',
+    'http://localhost:5173/fail'
+  )
+}
+
+
+
+let existingUser = await User.findOne({ appwriteId: user.$id });
+
+if (!existingUser) {
+  await Users.insert({
+    appwriteId: user.$id,
+    email: user.email,
+    name: user.name
+  });
+}
 
 class userController {
   createUser(req, res) {
