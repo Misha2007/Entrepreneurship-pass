@@ -1,6 +1,5 @@
 import * as bcrypt from "bcrypt";
 import db from "../models/index.js";
-import { account } from '../controllers/user.js'
 import jwt from "jsonwebtoken";
 import authConfig from "../config/auth.config.js";
 import "../util/db.js";
@@ -8,29 +7,39 @@ import User from "../models/user.js";
 
 
 
-const account = new sdk.Account(client);
-const user = await account.get();
+//   const { supabaseClient, headers } = createSupabaseServerClient(request);
+//   const { data } = await supabaseClient.auth.signInWithOAuth({
+//     provider: "google",
+//     options: {
+//       redirectTo: `http://localhost:5173/auth/callback`,
+//     },
+//   });
 
+//   if (data.url) {
+//     return redirect(data.url, { headers }); // I was missing the headers destructure on the first line and setting them here  }
 
-async function handleLogin () {
-  account.createOAuth2Session(
-    'google',
-    'http://localhost:5173/',
-    'http://localhost:5173/fail'
-  )
-}
+// export const createSupabaseServerClient = (request: Request) => {
+//   const cookies = parse(request.headers.get("Cookie") ?? "");
+//   const headers = new Headers();
 
+//   const supabaseClient = createServerClient(
+//     process.env.SUPABASE_URL!,
+//     process.env.SUPABASE_ANON_KEY!,
+//     {
+//       cookies: {
+//         get(key) {
+//           return cookies[key];
+//         },
+//         set(key, value, options) {
+//           headers.append("Set-Cookie", serialize(key, value, options));
+//         },
+//         remove(key, options) {
+//           headers.append("Set-Cookie", serialize(key, "", options));
+//         },
+//       },
+//     }
+//   )
 
-
-let existingUser = await User.findOne({ appwriteId: user.$id });
-
-if (!existingUser) {
-  await Users.insert({
-    appwriteId: user.$id,
-    email: user.email,
-    name: user.name
-  });
-}
 
 class userController {
   createUser(req, res) {
@@ -68,6 +77,8 @@ class userController {
               expiresIn: "2h",
             });
 
+            console.log(hash);
+
             res.status(201).json({
               message: "Created new user",
               newUser: newUser,
@@ -102,34 +113,46 @@ class userController {
       const storedHashedPassword = newUser.password;
       const userInputPassword = req.body.password;
 
-      bcrypt.compare(userInputPassword, storedHashedPassword, (err, result) => {
-        if (err) {
-          console.error("Error comparing passwords: ", err);
-          return;
-        }
+      bcrypt.compare(
+        userInputPassword,
+        storedHashedPassword,
+        async (err, result) => {
+          if (err) {
+            console.error("Error comparing passwords: ", err);
+            return;
+          }
 
-        const token = jwt.sign(
-          { clientId: newUser.clientId },
-          authConfig.secret,
+          console.log("INPUT PASSWORD:", JSON.stringify(userInputPassword));
+          console.log("HASH FROM DB:", JSON.stringify(storedHashedPassword));
+          console.log("INPUT LENGTH:", userInputPassword.length);
+          console.log("HASH LENGTH:", storedHashedPassword.length);
 
-          { expiresIn: "2h" },
-        );
+          const token = jwt.sign(
+            { userId: newUser.id },
+            authConfig.secret,
 
-        console.log("login user token", newUser.clientId);
-
-        if (result) {
-          console.log(
-            `[Server]: ${newUser.firstName} (${newUser.lastName}) logged in`,
+            { expiresIn: "2h" },
           );
-          return res.json({
-            user: newUser,
-            accessToken: token,
-          });
-        } else {
-          console.log("[Server]: Passwords do not match! Auth failed.");
-          res.status(401).send("Invalid credentials");
-        }
-      });
+
+          console.log("login user token", newUser.id);
+
+          if (result) {
+            console.log(
+              `[Server]: ${newUser.firstName} (${newUser.lastName}) logged in`,
+            );
+            return res.json({
+              user: newUser,
+              accessToken: token,
+            });
+          } else {
+            console.log(result);
+            console.log(token);
+            console.log(userInputPassword.length, storedHashedPassword);
+            console.log("[Server]: Passwords do not match! Auth failed.");
+            res.status(401).send("Invalid credentials");
+          }
+        },
+      );
     });
   }
 }

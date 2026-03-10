@@ -1,23 +1,13 @@
-import userRoutes from "./routes/user.js";
-
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import "./util/db.js";
 import bodyParser from "body-parser";
+import userRoutes from "./routes/user.js";
 
 
 const PORT = 3001;
 dotenv.config();
-
-const sdk = require("node-appwrite");
-const client = new sdk.Client();
-
-client
-  .setEndpoint(process.env.APPWRITE_ENDPOINT)
-  .setProject(process.env.APPWRITE_PROJECT_ID)
-  .setKey(process.env.APPWRITE_API_KEY);
-
 
 
 const app = express();

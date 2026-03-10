@@ -64,18 +64,23 @@ const SignUp = (props) => {
   };
 
   return (
-    <div class="signup-modal">
+    <div className="signup-modal">
       <div className="signup-modal-content">
         <div className="signup-header">
-          <h1>ETTEVÕTLIKKUSE PASS</h1>
-          <FaXmark size={40} color="#000" />
+          <h1 className="logo">ETTEVÕTLIKKUSE PASS</h1>
+          <FaXmark
+            size={40}
+            color="#000"
+            onClick={props.closeModal}
+            style={{ cursor: "pointer" }}
+          />
         </div>
         <form onSubmit={sumbitHandler}>
           <div className="form-group">
             <h2>Registreeri</h2>
 
             <div style={{ display: "flex", gap: "1rem" }}>
-              <div className="input-container">
+              <div className="input-container" style={{ width: "100%" }}>
                 <label htmlFor="firstName">Eesnimi</label>
 
                 <input
@@ -88,7 +93,7 @@ const SignUp = (props) => {
                 />
               </div>
 
-              <div className="input-container">
+              <div className="input-container" style={{ width: "100%" }}>
                 <label htmlFor="lastName">Perekonnanimi</label>
 
                 <input
