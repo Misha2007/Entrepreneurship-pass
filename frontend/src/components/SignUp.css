@@ -68,7 +68,9 @@
   color: #7b7b7b;
 }
 
-.input-container input {
+input,
+select,
+textarea {
   background: transparent;
   display: flex;
   padding: 18px 13px;
@@ -81,11 +83,15 @@
   leading-trim: both;
 }
 
-.input-container input:focus {
+textarea {
+  min-height: 10rem;
+}
+
+input:focus {
   outline: none;
 }
 
-.input-container label {
+label {
   color: #000;
   leading-trim: both;
   text-edge: cap;

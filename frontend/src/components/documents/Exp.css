@@ -1,0 +1,41 @@
+.exps {
+  max-width: 1000px;
+
+  div:not(.buttons) {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+    margin: 20px 0;
+
+    label {
+      margin-bottom: 10px;
+    }
+  }
+
+  .addfile .input-file-container {
+    position: relative;
+
+    div {
+      margin: 0;
+      background: #000;
+      height: 100%;
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      border-radius: 8px 0 0 8px;
+
+      svg {
+        padding: 15px;
+      }
+    }
+    input {
+      padding-left: 70px;
+    }
+  }
+}
+
+button.white {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}
