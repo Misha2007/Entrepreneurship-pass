@@ -8,6 +8,8 @@ import { FaRegEdit } from "react-icons/fa";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { HiAdjustmentsHorizontal } from "react-icons/hi2";
 import Header from "./Header";
+import NewExp from "./documents/NewExp";
+import Pass from "./documents/Pass";
 
 const sections = [
   {
@@ -20,13 +22,13 @@ const sections = [
     key: "new-exp",
     icon: <FiPlusCircle />,
     label: "Uus kogemus",
-    component: <DocumentsPage />,
+    component: <NewExp />,
   },
   {
     key: "passport",
     icon: <FaRegIdCard />,
     label: "Pass",
-    component: <DocumentsPage />,
+    component: <Pass />,
   },
   {
     key: "drafts",
@@ -112,10 +114,7 @@ const Account = (props) => {
           </ol>
         </div>
 
-        <div
-          className="robot18 section-container"
-          style={{ color: "#000", fontWeight: "bold" }}
-        >
+        <div className="section-container" style={{ color: "#000" }}>
           {sections.map(
             (section) =>
               openSection === section.key && (

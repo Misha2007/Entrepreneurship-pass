@@ -4,7 +4,7 @@
 }
 
 #sections-container {
-  width: 15%;
+  width: 20%;
 }
 
 .sections {
@@ -19,6 +19,7 @@
     background: #e7f5cc;
     color: #000;
     border-radius: 8px;
+    margin-right: 20px;
 
     p {
       margin: 0;
@@ -32,6 +33,8 @@
   li.active {
     background: #fafafa;
     border-radius: 8px 0 0 8px;
+    padding-right: 68px;
+    margin-right: 0;
   }
 }
 
