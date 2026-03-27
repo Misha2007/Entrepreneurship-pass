@@ -25,3 +25,17 @@
   justify-content: center;
   flex-direction: column;
 }
+
+.flexCenteredRow{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .flexCenteredRow.exSet svg{
+    width: 100px;
+  }
+}
+
+svg {
+  cursor: pointer;
+}

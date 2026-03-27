@@ -1,5 +1,4 @@
 import * as bcrypt from "bcrypt";
-import db from "../models/index.js";
 import jwt from "jsonwebtoken";
 import authConfig from "../config/auth.config.js";
 import "../util/db.js";
@@ -14,7 +13,7 @@ import User from "../models/user.js";
 //       redirectTo: `http://localhost:5173/auth/callback`,
 //     },
 //   });
-
+    // https://hdlhsghxiirxjbnewkzq.supabase.co/auth/v1/callback supabase callback
 //   if (data.url) {
 //     return redirect(data.url, { headers }); // I was missing the headers destructure on the first line and setting them here  }
 
@@ -41,7 +40,50 @@ import User from "../models/user.js";
 //   )
 
 
+
+
+
 class userController {
+
+
+  async googleLogin(req, res) {
+
+      console.log("Google login endpoint hit");
+      console.log("Body:", req.body);
+
+    const { email, firstName, lastName, birth } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ message: "Google auth failed" });
+    }
+
+    let user = await User.findOne({ where: { email } });
+
+    if (!user) {
+      user = await User.create({
+        firstName,
+        lastName,
+        email,
+        birth: birth,
+        password: null, // no password for Google users
+        provider: 'google'
+    
+      });
+    }
+
+    const token = jwt.sign(
+      { userId: user.id },
+      authConfig.secret,
+      { expiresIn: "2h" }
+    );
+
+    res.json({
+      user,
+      accessToken: token,
+    });
+  }
+
+
   createUser(req, res) {
     const saltRounds = 10;
     console.log("Received user data:", req.body);
@@ -71,6 +113,7 @@ class userController {
           birth: birth,
           email: email,
           password: hash,
+          provider: 'local',
         })
           .then((newUser) => {
             const token = jwt.sign({ userId: newUser.id }, authConfig.secret, {
@@ -140,9 +183,14 @@ class userController {
             console.log(
               `[Server]: ${newUser.firstName} (${newUser.lastName}) logged in`,
             );
-            return res.json({
-              user: newUser,
-              accessToken: token,
+            res.json({
+              user: {
+                id: newUser.id,
+                firstName: newUser.firstName,
+                lastName: newUser.lastName,
+                email: newUser.email
+              },
+              accessToken: token
             });
           } else {
             console.log(result);
