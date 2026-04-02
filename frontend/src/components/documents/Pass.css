@@ -1,33 +1,39 @@
 .pass-container {
   text-align: left;
+}
 
-  .pass-header {
-    display: flex;
-    margin-bottom: 40px;
-    justify-content: space-between;
+/* .pass-header inside .pass-container */
+.pass-container .pass-header {
+  display: flex;
+  margin-bottom: 40px;
+  justify-content: space-between;
+}
 
-    .prof-img {
-      width: 200px;
-      position: relative;
+/* .prof-img inside .pass-header */
+.pass-container .pass-header .prof-img {
+  width: 200px;
+  position: relative;
+}
 
-      img {
-        width: 100%;
-      }
+/* img inside .prof-img */
+.pass-container .pass-header .prof-img img {
+  width: 100%;
+}
 
-      svg {
-        position: absolute;
-        bottom: 0;
-        right: 10px;
-      }
-    }
-  }
+/* svg inside .prof-img */
+.pass-container .pass-header .prof-img svg {
+  position: absolute;
+  bottom: 0;
+  right: 10px;
+}
 
-  .exps-pass {
-    width: 100%;
-  }
+/* .exps-pass inside .pass-container */
+.pass-container .exps-pass {
+  width: 100%;
+}
 
-  .buttons {
-    width: 400px;
-    margin: 0 auto;
-  }
+/* .buttons inside .pass-container */
+.pass-container .buttons {
+  width: 400px;
+  margin: 0 auto;
 }

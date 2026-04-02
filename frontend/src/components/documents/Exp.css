@@ -1,37 +1,44 @@
 .exps {
   max-width: 1000px;
+}
 
-  div:not(.buttons) {
-    display: flex;
-    flex-direction: column;
-    text-align: start;
-    margin: 20px 0;
+/* divs inside .exps except .buttons */
+.exps div:not(.buttons) {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  margin: 20px 0;
+}
 
-    label {
-      margin-bottom: 10px;
-    }
-  }
+/* labels inside those divs */
+.exps div:not(.buttons) label {
+  margin-bottom: 10px;
+}
 
-  .addfile .input-file-container {
-    position: relative;
+/* .input-file-container inside .addfile inside .exps */
+.exps .addfile .input-file-container {
+  position: relative;
+}
 
-    div {
-      margin: 0;
-      background: #000;
-      height: 100%;
-      position: absolute;
-      display: flex;
-      justify-content: center;
-      border-radius: 8px 0 0 8px;
+/* inner div inside input-file-container */
+.exps .addfile .input-file-container div {
+  margin: 0;
+  background: #000;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px 0 0 8px;
+}
 
-      svg {
-        padding: 15px;
-      }
-    }
-    input {
-      padding-left: 70px;
-    }
-  }
+/* svg inside that div */
+.exps .addfile .input-file-container div svg {
+  padding: 15px;
+}
+
+/* input inside input-file-container */
+.exps .addfile .input-file-container input {
+  padding-left: 70px;
 }
 
 button.white {
