@@ -196,6 +196,71 @@ class userController {
       },
     );
   }
+
+  getUserData(req, res) {
+    const userId = req.user.id;
+    User.findByPk(userId)
+      .then((user) => {
+        if (!user) {
+          return res.status(404).json({ message: "User not found" });
+        }
+        res.json({
+          firstName: user.firstName,
+          lastName: user.lastName,
+          birth: user.birth,
+          email: user.email,
+          phone: user.phone,
+          residency: user.residency,
+          education: user.education,
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ message: "Error fetching user data", error: err.message });
+      });
+  }
+
+  updateUserData(req, res) {
+    const userId = req.user.id;
+    const { firstName, lastName, birth, email, phone, residency, education } =
+      req.body;
+    User.findByPk(userId)
+      .then((user) => {
+        if (!user) {
+          return res.status(404).json({ message: "User not found" });
+        }
+
+        user.firstName = firstName || user.firstName;
+        user.lastName = lastName || user.lastName;
+        user.birth = birth || user.birth;
+        user.email = email || user.email;
+        user.phone = phone || user.phone;
+        user.residency = residency || user.residency;
+        user.education = education || user.education;
+
+        return user.save();
+      })
+      .then((updatedUser) => {
+        res.json({
+          message: "User data updated successfully",
+          user: {
+            firstName: updatedUser.firstName,
+            lastName: updatedUser.lastName,
+            birth: updatedUser.birth,
+            email: updatedUser.email,
+            phone: updatedUser.phone,
+            residency: updatedUser.residency,
+            education: updatedUser.education,
+          },
+        });
+      })
+      .catch((err) => {
+        res
+          .status(500)
+          .json({ message: "Error updating user data", error: err.message });
+      });
+  }
 }
 
 export const UserController = new userController();

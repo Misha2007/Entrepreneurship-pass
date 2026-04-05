@@ -47,6 +47,10 @@
   gap: 15px;
 }
 
+.buttons button {
+  width: 100%;
+}
+
 .login {
   padding: 8px 16px;
   cursor: pointer;

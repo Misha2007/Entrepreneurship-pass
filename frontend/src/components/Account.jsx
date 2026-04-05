@@ -10,6 +10,7 @@ import { HiAdjustmentsHorizontal } from "react-icons/hi2";
 import Header from "./Header";
 import NewExp from "./documents/NewExp";
 import Pass from "./documents/Pass";
+import Settings from "./documents/Settings";
 
 const sections = [
   {
@@ -46,7 +47,7 @@ const sections = [
     key: "settings",
     icon: <HiAdjustmentsHorizontal />,
     label: "Seaded",
-    component: <DocumentsPage />,
+    component: <Settings />,
   },
 ];
 

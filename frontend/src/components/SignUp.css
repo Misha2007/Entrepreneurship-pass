@@ -43,10 +43,10 @@
   width: 100%;
 }
 
-.signup-modal .form-group {
+.form-group {
   display: flex;
   flex-direction: column;
-  gap: 44px;
+  gap: 22px;
 }
 
 .signup-modal form {
@@ -62,6 +62,7 @@
   align-items: flex-start;
   gap: 8px;
   align-self: stretch;
+  width: 100%;
 }
 
 .input-container input:placeholder-shown {

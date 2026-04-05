@@ -6,7 +6,11 @@
 .pass-container .pass-header {
   display: flex;
   margin-bottom: 40px;
-  justify-content: space-between;
+}
+
+.pass-container .pass-header .doc {
+  flex: 2;
+  margin-right: 200px;
 }
 
 /* .prof-img inside .pass-header */
