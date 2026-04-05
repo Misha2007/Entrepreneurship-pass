@@ -34,6 +34,7 @@
 /* .exps-pass inside .pass-container */
 .pass-container .exps-pass {
   width: 100%;
+  border-collapse: collapse;
 }
 
 /* .buttons inside .pass-container */

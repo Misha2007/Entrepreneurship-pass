@@ -2,21 +2,24 @@ import { FaChevronDown } from "react-icons/fa";
 import "./Header.css";
 import HeaderProfile from "./HeaderProfile.jsx";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Header = (props) => {
   const [isHeaderProfile, setIsHeaderProfile] = useState(false);
+  const navigate = useNavigate();
 
   const logoutHandler = () => {
     localStorage.removeItem("authToken");
     navigate("/");
   };
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("authToken");
-  //   if (!token) {
-  //     logoutHandler();
-  //   }
-  // }, []);
+  useEffect(() => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      logoutHandler();
+    }
+  }, []);
 
   return (
     <div id="header-auth">

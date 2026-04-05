@@ -12,42 +12,35 @@ const { VITE_API_URL } = import.meta.env;
 const Pass = (props) => {
   const [error, setError] = useState(null);
 
-  const emailInputRef = useRef();
-  const passwordInputRef = useRef();
+  const [exps, setExps] = useState([]);
 
   const errorHandler = () => {
     setError(null);
   };
 
-  const saveUserDataHandler = (enteredUserData) => {
-    const userData = {
-      ...enteredUserData,
-    };
-    props.onLoginUser(userData);
-  };
-
-  const sumbitHandler = (event) => {
-    event.preventDefault();
-    const enteredEmail = emailInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
-    event.preventDefault();
-
-    if (enteredEmail.trim().length == 0 || enteredPassword.trim().length == 0) {
-      setError({
-        title: "Invalid input",
-        message:
-          "Please enter a valid name or email or password (non-empty values)",
-      });
-      return;
-    }
-
-    const userData = {
-      email: enteredEmail,
-      password: enteredPassword,
+  useEffect(() => {
+    const getExps = async () => {
+      try {
+        const response = await fetch(`${VITE_API_URL}exps/get-exps`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+          },
+        });
+        if (!response.ok) {
+          throw new Error("Failed to fetch experiences");
+        }
+        const data = await response.json();
+        console.log("Fetched experiences:", data);
+        setExps(data);
+      } catch (err) {
+        console.error("Error fetching experiences:", err);
+      }
     };
 
     getExps();
-  };
+  }, []);
 
   const exportPass = async () => {
     try {
@@ -86,67 +79,53 @@ const Pass = (props) => {
           <FaPlusCircle size={50} />
         </div>
       </div>
-      <table className="exps-pass">
-        <tr>
-          <th>
-            <h2>Kogemused</h2>
-          </th>
-          <th>
-            <h2>Kuupäev/maht</h2>
-          </th>
-          <th>
-            <h2>Näitan / Ei näita</h2>
-          </th>
-        </tr>
+      <div style={{ maxHeight: "300px", overflowY: "auto" }}>
+        <table className="exps-pass">
+          <thead
+            style={{
+              position: "sticky",
+              top: 0,
+              background: "white",
+              zIndex: 1,
+            }}
+          >
+            <tr>
+              <th>
+                <h2>Kogemused</h2>
+              </th>
+              <th>
+                <h2>Kuupäev/maht</h2>
+              </th>
+              <th>
+                <h2>Näitan / Ei näita</h2>
+              </th>
+            </tr>
+          </thead>
+          {exps.map((exp) => (
+            <tr key={exp.id}>
+              <td>{exp.type}</td>
+              <td>
+                {(() => {
+                  const d = new Date(exp.date);
+                  const day = String(d.getDate()).padStart(2, "0");
+                  const month = String(d.getMonth() + 1).padStart(2, "0");
+                  const year = d.getFullYear();
 
-        <tr>
-          <td>Erasmus +</td>
-          <td>03.2025</td>
-          <td>
-            <FaToggleOn size={35} />
-          </td>
-        </tr>
-
-        <tr>
-          <td>Vabatahtlik töö</td>
-          <td>180 h</td>
-          <td>
-            <FaToggleOn size={35} />
-          </td>
-        </tr>
-
-        <tr>
-          <td>Koolitus</td>
-          <td>02.-04.2025</td>
-          <td>
-            <FaToggleOn size={35} />
-          </td>
-        </tr>
-
-        <tr>
-          <td>Koolitus</td>
-          <td>02.-12.2025</td>
-          <td>
-            <FaToggleOff size={35} />
-          </td>
-        </tr>
-
-        <tr>
-          <td>Üritused</td>
-          <td>12.12.2025</td>
-          <td>
-            <FaToggleOn size={35} />
-          </td>
-        </tr>
-
-        <tr>
-          <td>Vabatahtlik töö</td>
-          <td>17.11.2025</td>
-          <td>
-            <FaToggleOn size={35} />
-          </td>
-        </tr>
-      </table>
+                  return `${day}.${month}.${year}`;
+                })()}
+              </td>
+              <td>
+                {/* {exp.visible ? (
+                <FaToggleOn size={35} />
+              ) : (
+                <FaToggleOff size={35} />
+              )} */}
+                <FaToggleOff size={35} />
+              </td>
+            </tr>
+          ))}
+        </table>
+      </div>
       <h2>Refleksioon</h2>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod

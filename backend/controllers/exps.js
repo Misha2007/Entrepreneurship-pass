@@ -39,6 +39,18 @@ class expsController {
         .json({ message: "Error creating experience", error: err.message });
     }
   };
+
+  getExps = async (req, res) => {
+    try {
+      const userId = req.user.id;
+      const experiences = await Experience.findAll({ where: { userId } });
+      res.status(200).json(experiences);
+    } catch (err) {
+      res
+        .status(500)
+        .json({ message: "Error fetching experiences", error: err.message });
+    }
+  };
 }
 
 export const ExpsController = new expsController();

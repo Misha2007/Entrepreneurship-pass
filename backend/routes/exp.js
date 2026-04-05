@@ -8,6 +8,8 @@ router.post("/new-exp", verifyToken, (req, res) =>
   ExpsController.addExp(req, res),
 );
 
-router.get("/get-exps", (req, res) => ExpsController.getExps(req, res));
+router.get("/get-exps", verifyToken, (req, res) =>
+  ExpsController.getExps(req, res),
+);
 
 export default router;
