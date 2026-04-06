@@ -1,4 +1,4 @@
-#root {
+#root::not(#exported-pass) {
   margin: 0 auto;
   text-align: center;
   width: 100%;
@@ -26,12 +26,12 @@
   flex-direction: column;
 }
 
-.flexCenteredRow{
+.flexCenteredRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  .flexCenteredRow.exSet svg{
+  .flexCenteredRow.exSet svg {
     width: 100px;
   }
 }

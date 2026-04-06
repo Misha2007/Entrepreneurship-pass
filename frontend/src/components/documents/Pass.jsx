@@ -4,6 +4,10 @@ import "./Pass.css";
 import { FaToggleOn } from "react-icons/fa6";
 import { FaToggleOff } from "react-icons/fa6";
 import { FaPlusCircle } from "react-icons/fa";
+import { useEffect } from "react";
+import { redirect } from "react-router-dom";
+
+const { VITE_API_URL } = import.meta.env;
 
 const Pass = (props) => {
   const [error, setError] = useState(null);
@@ -42,9 +46,30 @@ const Pass = (props) => {
       password: enteredPassword,
     };
 
-    saveUserDataHandler(userData);
-    emailInputRef.current.value = "";
-    passwordInputRef.current.value = "";
+    getExps();
+  };
+
+  const exportPass = async () => {
+    try {
+      const response = await fetch(`${VITE_API_URL}passports/new-pass`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("authToken")}`,
+        },
+        body: JSON.stringify({
+          expIds: expsIncluded,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch experiences");
+      }
+      const data = await response.json();
+      console.log("Fetched password:", data);
+      redirect(`/passport/${data.passport.id}`);
+    } catch (err) {
+      console.error("Error fetching experiences:", err);
+    }
   };
 
   return (

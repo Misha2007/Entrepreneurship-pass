@@ -1,8 +1,8 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
+"use strict";
+import { Model, DataTypes } from "sequelize";
+import sequelize from "../util/db.js";
+
+export default (sequelize) => {
   class Passport extends Model {
     /**
      * Helper method for defining associations.
@@ -13,11 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  Passport.init({
-    temp: DataTypes.STRING
-  }, {
-    sequelize,
-    modelName: 'Passport',
-  });
+  Passport.init(
+    {},
+    {
+      sequelize,
+      modelName: "Passport",
+    },
+  );
   return Passport;
 };
