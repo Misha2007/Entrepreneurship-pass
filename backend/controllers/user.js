@@ -1,86 +1,77 @@
 import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import authConfig from "../config/auth.config.js";
+import googleConfig from "../config/google.config.js";
 import "../util/db.js";
 import User from "../models/user.js";
+import { google } from "googleapis";
 
-
-
-//   const { supabaseClient, headers } = createSupabaseServerClient(request);
-//   const { data } = await supabaseClient.auth.signInWithOAuth({
-//     provider: "google",
-//     options: {
-//       redirectTo: `http://localhost:5173/auth/callback`,
-//     },
-//   });
-    // https://hdlhsghxiirxjbnewkzq.supabase.co/auth/v1/callback supabase callback
-//   if (data.url) {
-//     return redirect(data.url, { headers }); // I was missing the headers destructure on the first line and setting them here  }
-
-// export const createSupabaseServerClient = (request: Request) => {
-//   const cookies = parse(request.headers.get("Cookie") ?? "");
-//   const headers = new Headers();
-
-//   const supabaseClient = createServerClient(
-//     process.env.SUPABASE_URL!,
-//     process.env.SUPABASE_ANON_KEY!,
-//     {
-//       cookies: {
-//         get(key) {
-//           return cookies[key];
-//         },
-//         set(key, value, options) {
-//           headers.append("Set-Cookie", serialize(key, value, options));
-//         },
-//         remove(key, options) {
-//           headers.append("Set-Cookie", serialize(key, "", options));
-//         },
-//       },
-//     }
-//   )
-
-
-
-
+// create OAuth client
+const oauth2Client = new google.auth.OAuth2(
+  googleConfig.clientId,
+  googleConfig.clientSecret,
+  googleConfig.redirectUrl
+);
 
 class userController {
 
-
-  async googleLogin(req, res) {
-
-      console.log("Google login endpoint hit");
-      console.log("Body:", req.body);
-
-    const { email, firstName, lastName, birth } = req.body;
-
-    if (!email) {
-      return res.status(400).json({ message: "Google auth failed" });
-    }
-
-    let user = await User.findOne({ where: { email } });
-
-    if (!user) {
-      user = await User.create({
-        firstName,
-        lastName,
-        email,
-        birth: birth,
-        password: null, // no password for Google users
-        provider: 'google'
-    
-      });
-    }
-
-    const token = jwt.sign(
-      { userId: user.id },
-      authConfig.secret,
-      { expiresIn: "2h" }
-    );
-
-    res.json({
-      user,
-      accessToken: token,
+  // redirect user to Google's OAuth page
+  googleAuthStart(req, res) {
+    const url = oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      scope: ['email', 'profile'],
+       redirect_uri: googleConfig.redirectUrl
     });
+    res.redirect(url);
+  }
+
+  // Handle Google's callback and create/find user
+  async googleAuthCallback(req, res) {
+    try {
+      const { code } = req.query;
+
+      if (!code) {
+        return res.status(400).json({ message: "No authorization code received" });
+      }
+
+      // Exchange code for tokens
+      const { tokens } = await oauth2Client.getToken(code);
+      oauth2Client.setCredentials(tokens);
+
+      // Get user info from Google
+      const oauth2 = google.oauth2({ version: 'v2', auth: oauth2Client });
+      const { data: googleUser } = await oauth2.userinfo.get();
+
+      // Find or create user in your DB
+      let user = await User.findOne({ where: { email: googleUser.email } });
+
+      if (!user) {
+        user = await User.create({
+          firstName: googleUser.given_name || 'Google',
+          lastName: googleUser.family_name || 'User',
+          email: googleUser.email,
+          birth: null,
+          password: null,
+          provider: 'google',
+        });
+      }
+
+      // JWT token
+      const token = jwt.sign(
+        { userId: user.id },
+        authConfig.secret,
+        { expiresIn: "2h" }
+      );
+
+      // Redirect to frontend with token
+      const redirectUrl = `${googleConfig.frontendCallback}?token=${token}&userId=${user.id}`;
+      console.log("Redirecting to frontend:", redirectUrl);
+      res.redirect(redirectUrl);
+
+    } catch (error) {
+      console.error("Google OAuth callback error:", error);
+      res.status(500).json({ message: "Failed to authenticate with Google" });
+    }
   }
 
 

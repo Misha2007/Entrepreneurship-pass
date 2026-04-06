@@ -1,32 +1,15 @@
 import "./SignUp.css";
 import { useState, useRef } from "react";
 import { FaXmark } from "react-icons/fa6";
-import { supabase } from "../lib/supabase";
 
-// const { VITE_API_URL } = import.meta.env;
+const { VITE_API_URL } = import.meta.env;
 
 
 const SignIn = (props) => {
 
-  // const { data } = await supabase.auth.signInWithOAuth({
-  //   provider: "google",
-  //   options: {
-  //     redirectTo: "http://localhost:5173/auth/callback"
-  //   }
-  // });
-  const handleGoogleLogin = async () => {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-          scopes: "email profile https://www.googleapis.com/auth/user.birthday.read",
-          redirectTo: "http://192.168.47.181:3001/auth/callback",
-          provider: "google"
-      }
-    });
-
-    if (error) {
-      console.error(error);
-    }
+  const handleGoogleLogin = () => {
+    // Redirect to backend's server-side Google OAuth endpoint
+    window.location.href = `${VITE_API_URL}users/auth/google`;
   };
 
   const [error, setError] = useState(null);

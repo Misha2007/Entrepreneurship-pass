@@ -1,50 +1,31 @@
 import { useEffect } from "react";
-import { supabase } from "../lib/supabase";
-
-const { VITE_API_URL } = import.meta.env;
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function AuthCallback() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
-    const handleCallback = async () => {
-      // Get the current session from Supabase
-      const { data, error } = await supabase.auth.getSession();
+    // Get token from URL query params (set by backend redirect)
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+    const userId = params.get("userId");
 
-      if (error) {
-        console.error("Error getting session:", error);
+    if (!token) {
+      if (window.location.search.length === 0) {
         return;
       }
+      console.error("No token received from Google auth");
+      navigate("/?error=auth_failed");
+      return;
+    }
 
-      if (!data.session) {
-        console.error("No session found");
-        return;
-      }
+    // Save your own JWT in localStorage
+    localStorage.setItem("authToken", token);
+    localStorage.setItem("userId", userId);
 
-      const user = data.session.user;
-
-      // Optionally, send user info to your backend
-      const res = await fetch(`${VITE_API_URL}users/auth/google`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          email: user.email,
-          firstName: user.user_metadata.full_name?.split(" ")[0],
-          lastName: user.user_metadata.full_name?.split(" ")[1],
-          // birthday may be null
-        }),
-      });
-
-      const json = await res.json();
-      console.log("Backend response:", json);
-
-      // Save your own JWT in localStorage or context
-      localStorage.setItem("token", json.accessToken);
-
-      // Redirect to dashboard
-      window.location.href = "/account";
-    };
-
-    handleCallback();
-  }, []);
+    navigate("/account");
+  }, [navigate, location.pathname]);
 
   return <div>Signing you in...</div>;
 }

@@ -35,11 +35,16 @@ User.init(
     },
     birth: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: true,
     },
     password: {
-      type: DataTypes.CHAR(60),
-      allowNull: false,
+      type: DataTypes.STRING(60),
+      allowNull: true,
+    },
+    provider: {
+      type: DataTypes.ENUM("local", "google", "smartID", "mobiiliID"),
+      allowNull: true,
+      defaultValue: "local",
     },
     status: {
       type: DataTypes.ENUM("created", "confirmed", "deleted", "banned"),

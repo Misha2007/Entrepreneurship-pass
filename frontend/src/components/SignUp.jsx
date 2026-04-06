@@ -24,7 +24,7 @@ const SignUp = (props) => {
 
   const sumbitHandler = (event) => {
     event.preventDefault();
-    console.log("sjadlkjasdsajd");
+    console.log("Register form submitted");
     const enteredFirstName = firstNameInputRef.current.value;
     const enteredLastName = lastNameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;

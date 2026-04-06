@@ -8,8 +8,9 @@ router.post("/new-user", (req, res) => UserController.createUser(req, res));
 
 router.post("/login", (req, res) => UserController.getUser(req, res));
 
-// Handle login via google Oauth
-router.post("/auth/google", (req, res) => UserController.googleLogin(req, res));
+router.get("/auth/google", (req, res) => UserController.googleAuthStart(req, res));
+
+router.get("/auth/google/callback", (req, res) => UserController.googleAuthCallback(req, res));
 
 
 

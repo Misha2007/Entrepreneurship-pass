@@ -1,13 +1,13 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
 import "./util/db.js";
 import bodyParser from "body-parser";
 import userRoutes from "./routes/user.js";
 import expRoutes from "./routes/exp.js";
 
 const PORT = 3001;
-dotenv.config();
 
 const app = express();
 app.use(bodyParser.json());
