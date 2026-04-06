@@ -14,6 +14,8 @@ const Pass = (props) => {
 
   const [exps, setExps] = useState([]);
 
+  const [expsIncluded, setExpsIncluded] = useState([]);
+
   const errorHandler = () => {
     setError(null);
   };
@@ -115,12 +117,26 @@ const Pass = (props) => {
                 })()}
               </td>
               <td>
-                {/* {exp.visible ? (
-                <FaToggleOn size={35} />
-              ) : (
-                <FaToggleOff size={35} />
-              )} */}
-                <FaToggleOff size={35} />
+                {expsIncluded.includes(exp.id) ? (
+                  <FaToggleOn
+                    size={35}
+                    onClick={() => {
+                      setExpsIncluded((expsIncluded) =>
+                        expsIncluded.filter((item) => item !== exp.id),
+                      );
+                    }}
+                  />
+                ) : (
+                  <FaToggleOff
+                    size={35}
+                    onClick={() => {
+                      setExpsIncluded((expsIncluded) => [
+                        ...expsIncluded,
+                        exp.id,
+                      ]);
+                    }}
+                  />
+                )}
               </td>
             </tr>
           ))}
@@ -138,7 +154,7 @@ const Pass = (props) => {
       </p>
       <p>Loe edasi..</p>
       <div className="buttons">
-        <button>Ekspordi</button>
+        <button onClick={exportPass}>Ekspordi</button>
         <button className="white">Mustand</button>
       </div>
     </div>
