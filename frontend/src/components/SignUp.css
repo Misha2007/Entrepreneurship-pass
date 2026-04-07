@@ -40,21 +40,13 @@
   border-radius: 23px 0;
   background: #1e1e1e;
   padding: 16px 32px;
-
-  color: #fff;
-  font-family: Inter;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
   width: 100%;
-  margin: 0;
 }
 
-.signup-modal .form-group {
+.form-group {
   display: flex;
   flex-direction: column;
-  gap: 44px;
+  gap: 22px;
 }
 
 .signup-modal form {
@@ -70,13 +62,16 @@
   align-items: flex-start;
   gap: 8px;
   align-self: stretch;
+  width: 100%;
 }
 
 .input-container input:placeholder-shown {
   color: #7b7b7b;
 }
 
-.input-container input {
+input,
+select,
+textarea {
   background: transparent;
   display: flex;
   padding: 18px 13px;
@@ -89,20 +84,15 @@
   leading-trim: both;
 }
 
-.robot20 {
-  text-edge: cap;
-  font-family: Roboto;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+textarea {
+  min-height: 10rem;
 }
 
-.input-container input:focus {
+input:focus {
   outline: none;
 }
 
-.input-container label {
+label {
   color: #000;
   leading-trim: both;
   text-edge: cap;

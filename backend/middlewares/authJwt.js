@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import authConfig from "../config/auth.config.js";
-import Clients from "../models/user.js";
+import models from "../models/index.js";
 
 export const verifyToken = async (req, res, next) => {
   const headerToken =
@@ -19,9 +19,9 @@ export const verifyToken = async (req, res, next) => {
     console.log("Decoded JWT:", decoded);
 
     req.user = req.user || {};
-    req.user.clientId = decoded.clientId;
+    req.user.userid = decoded.userId;
 
-    const user = await Clients.findByPk(req.user.clientId);
+    const user = await models.User.findByPk(req.user.userid);
     console.log("Found user:", user);
 
     if (!user) {

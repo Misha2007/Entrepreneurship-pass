@@ -1,0 +1,31 @@
+#header-auth {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 34px 60px;
+}
+
+#header-auth .buttons {
+    align-items: center;
+    background: #d9d9d9;
+    color: #000;
+    border-radius: 50px;
+    padding: 0 10px 0 0;
+  }
+
+
+#popup-header {
+  position: absolute;
+  right: 20px;
+  top: 80px;
+  background: #fff;
+  color: #000;
+  border-radius: 15px;
+  padding: 5px 20px 10px;
+}
+
+#popup-header .flexCenteredRow.exSet svg {
+    font-size: 25px;
+    font-weight: bold;
+    color: #000; 
+}

@@ -1,20 +1,20 @@
-import { useState } from "react";
 import "./App.css";
-import { Router, useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 import AuthWrapper from "./components/AuthWrapper";
 import SignUp from "./components/SignUp";
+import AuthCallback from "./components/AuthCallback";
+import { Route, Routes, useNavigate, Router } from "react-router-dom";
 import Home from "./pages/home";
+import Account from "./components/Account";
+import DonePass from "./components/documents/DonePass";
 
 function App() {
   return (
-    <>
-      {/* <div>
-        <AuthWrapper />
-      </div> */}
-
-      <Home />
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/account" element={<Account />} />
+      <Route path="/passport/:id" element={<DonePass />} />
+      <Route path="/auth/callback" element={<AuthCallback />} />
+    </Routes>
   );
 }
 

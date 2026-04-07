@@ -1,0 +1,48 @@
+.exps {
+  max-width: 1000px;
+}
+
+/* divs inside .exps except .buttons */
+.exps div:not(.buttons) {
+  display: flex;
+  flex-direction: column;
+  text-align: start;
+  margin: 20px 0;
+}
+
+/* labels inside those divs */
+.exps div:not(.buttons) label {
+  margin-bottom: 10px;
+}
+
+/* .input-file-container inside .addfile inside .exps */
+.exps .addfile .input-file-container {
+  position: relative;
+}
+
+/* inner div inside input-file-container */
+.exps .addfile .input-file-container div {
+  margin: 0;
+  background: #000;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px 0 0 8px;
+}
+
+/* svg inside that div */
+.exps .addfile .input-file-container div svg {
+  padding: 15px;
+}
+
+/* input inside input-file-container */
+.exps .addfile .input-file-container input {
+  padding-left: 70px;
+}
+
+button.white {
+  background: #fff;
+  color: #000;
+  border: 1px solid #000;
+}

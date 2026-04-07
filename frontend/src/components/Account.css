@@ -1,0 +1,49 @@
+.acc {
+  display: flex;
+  margin: 60px;
+}
+
+#sections-container {
+  width: 20%;
+}
+
+.sections {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+/* li inside .sections */
+.sections li {
+  margin-bottom: 16px;
+  padding: 32px 48px;
+  background: #e7f5cc;
+  color: #000;
+  border-radius: 8px;
+  margin-right: 20px;
+}
+
+/* p inside li */
+.sections li p {
+  margin: 0;
+}
+
+/* svg inside li */
+.sections li svg {
+  width: 32px;
+  height: 32px;
+}
+
+/* active li */
+.sections li.active {
+  background: #fafafa;
+  border-radius: 8px 0 0 8px;
+  padding-right: 68px;
+  margin-right: 0;
+}
+
+.section-container {
+  background: #fff;
+  width: 100%;
+}

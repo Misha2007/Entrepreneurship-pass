@@ -1,0 +1,88 @@
+.documents-container {
+  padding: 0 110px 70px 110px;
+}
+
+/* h1 inside .documents-container */
+.documents-container h1 {
+  text-align: left;
+}
+
+.documents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+/* .create inside .documents */
+.documents .create {
+  border-radius: 10px !important;
+  border-color: rgba(98, 229, 244, 0.3) !important;
+  background: rgba(98, 229, 244, 0.2);
+  padding: 0 !important;
+}
+
+/* svg inside .create */
+.documents .create svg {
+  width: 60px;
+  height: 60px;
+}
+
+/* .desc inside .documents */
+.documents .desc {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px solid #000;
+  padding: 20px;
+  gap: 32px;
+  border-radius: 0 10px 10px 10px;
+}
+
+/* hr inside .desc */
+.documents .desc hr {
+  height: 5px;
+  background-color: #ff00ff;
+  width: 100%;
+  margin-top: 30px;
+}
+
+/* .title inside .desc */
+.documents .desc .title {
+  margin-top: 30px;
+  color: #000;
+}
+
+/* .doc inside .documents */
+.documents .doc {
+  flex: 1 1 400px;
+}
+
+/* .status inside .doc */
+.documents .doc .status {
+  border: 2px solid #000;
+  border-bottom: none;
+  text-align: left;
+  width: fit-content;
+  position: relative;
+  border-radius: 10px 10px 0 0;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+}
+
+/* p inside .status */
+.documents .doc .status p {
+  padding: 10px;
+}
+
+/* pseudo-element */
+.documents .doc .status::before {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  height: 3px;
+  right: 0;
+  left: 0;
+  background: white;
+}

@@ -2,7 +2,16 @@ import "./SignUp.css";
 import { useState, useRef } from "react";
 import { FaXmark } from "react-icons/fa6";
 
+const { VITE_API_URL } = import.meta.env;
+
+
 const SignIn = (props) => {
+
+  const handleGoogleLogin = () => {
+    // Redirect to backend's server-side Google OAuth endpoint
+    window.location.href = `${VITE_API_URL}users/auth/google`;
+  };
+
   const [error, setError] = useState(null);
 
   const emailInputRef = useRef();
@@ -96,12 +105,18 @@ const SignIn = (props) => {
           className="flexCentered robot20"
           style={{ color: "#000", fontWeight: "bold" }}
         >
-          <p>Voi</p>
-          <div style={{ gap: "32px", display: "flex" }}>
-            <img src="/assets/pictures/google.png" alt="" />
-            <img src="/assets/pictures/smartId.png" alt="" />
-            <img src="/assets/pictures/mobId.png" alt="" />
-          </div>
+          <p>Või</p>
+            <div style={{ gap: "32px", display: "flex" }}>
+              <img
+                src="/assets/pictures/google.png"
+                alt="Sign in with Google"
+                style={{ cursor: "pointer" }}
+                onClick={handleGoogleLogin}
+              />
+
+              <img src="/assets/pictures/smartId.png" alt="Smart ID" />
+              <img src="/assets/pictures/mobId.png" alt="Mobile ID" />
+            </div>
           <p>Pole veel kasutaja?</p>
           <p>
             Registreeri end{" "}

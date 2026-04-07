@@ -24,7 +24,7 @@ const SignUp = (props) => {
 
   const sumbitHandler = (event) => {
     event.preventDefault();
-    console.log("sjadlkjasdsajd");
+    console.log("Register form submitted");
     const enteredFirstName = firstNameInputRef.current.value;
     const enteredLastName = lastNameInputRef.current.value;
     const enteredEmail = emailInputRef.current.value;
@@ -67,7 +67,7 @@ const SignUp = (props) => {
     <div className="signup-modal">
       <div className="signup-modal-content">
         <div className="signup-header">
-          <h1>ETTEVÕTLIKKUSE PASS</h1>
+          <h1 className="logo">ETTEVÕTLIKKUSE PASS</h1>
           <FaXmark
             size={40}
             color="#000"
@@ -150,6 +150,9 @@ const SignUp = (props) => {
             Registreeri
           </button>
         </form>
+        <div id="login-screen" className="hidden">
+          <button id="login-btn">Login with Google</button>
+        </div>
       </div>
     </div>
   );

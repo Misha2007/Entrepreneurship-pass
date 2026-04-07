@@ -1,0 +1,13 @@
+.add-education {
+  margin-bottom: 20px;
+  background: #1a1a1a;
+  width: 100%;
+  display: flex;
+  color: #fff;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-sizing: border-box;
+}
