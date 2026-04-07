@@ -40,11 +40,9 @@ export default (sequelize) => {
       },
       birth: {
         type: DataTypes.DATE,
-        allowNull: false,
       },
       password: {
         type: DataTypes.CHAR(60),
-        allowNull: false,
       },
       status: {
         type: DataTypes.ENUM("created", "confirmed", "deleted", "banned"),

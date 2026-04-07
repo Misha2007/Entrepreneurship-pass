@@ -1,4 +1,4 @@
-#root::not(#exported-pass) {
+#root:not(#exported-pass) {
   margin: 0 auto;
   text-align: center;
   width: 100%;

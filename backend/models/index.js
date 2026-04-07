@@ -54,7 +54,7 @@ import path from "path";
 import Sequelize from "sequelize";
 import sequelize from "../util/db.js";
 import process from "process";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -73,7 +73,8 @@ const files = fs
   );
 
 for (const file of files) {
-  const { default: modelFunc } = await import(path.join(__dirname, file));
+  const filePath = pathToFileURL(path.join(__dirname, file)).href;
+  const { default: modelFunc } = await import(filePath);
   const model = modelFunc(sequelize, Sequelize.DataTypes);
   db[model.name] = model;
 }
