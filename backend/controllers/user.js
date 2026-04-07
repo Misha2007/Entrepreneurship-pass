@@ -147,6 +147,7 @@ class userController {
 
         const storedHashedPassword = newUser.password;
         const userInputPassword = req.body.password;
+        console.log("Comparing passwords for user:", userInputPassword);
 
         bcrypt.compare(
           userInputPassword,
@@ -199,7 +200,7 @@ class userController {
 
   getUserData(req, res) {
     const userId = req.user.id;
-    User.findByPk(userId)
+    models.User.findByPk(userId)
       .then((user) => {
         if (!user) {
           return res.status(404).json({ message: "User not found" });
@@ -225,7 +226,7 @@ class userController {
     const userId = req.user.id;
     const { firstName, lastName, birth, email, phone, residency, education } =
       req.body;
-    User.findByPk(userId)
+    models.User.findByPk(userId)
       .then((user) => {
         if (!user) {
           return res.status(404).json({ message: "User not found" });
