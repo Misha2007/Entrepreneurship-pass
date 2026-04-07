@@ -18,7 +18,7 @@ app.use(
       "http://localhost:5173",
       "http://192.168.47.181:5173",
       "http://192.168.27.248:5173",
-      "https://ettev-pass.netlify.app/",
+      "https://ettev-pass.netlify.app",
     ],
     methods: ["GET", "POST", "PATCH"],
   }),
