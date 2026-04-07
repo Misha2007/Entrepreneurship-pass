@@ -52,7 +52,7 @@ class passController {
       });
     } catch (err) {
       await transaction.rollback();
-
+      console.error("Error creating passport", err);
       res
         .status(500)
         .json({ message: "Error creating passport", error: err.message });

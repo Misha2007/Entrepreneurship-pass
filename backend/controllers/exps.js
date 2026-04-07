@@ -2,10 +2,10 @@ import * as bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import authConfig from "../config/auth.config.js";
 import "../util/db.js";
-import Experience from "../models/experience.js";
+import models from "../models/index.js";
 
 class expsController {
-  addExp = async (req, res) => {
+  async addExp(req, res) {
     try {
       const { type, title, date, reflection, mentor_email } = req.body;
       const converted_date = new Date(date);
@@ -15,7 +15,7 @@ class expsController {
         return res.status(400).json({ message: "Fill all required fields" });
       }
 
-      const addedExp = await Experience.create({
+      const addedExp = await models.Experience.create({
         type: type,
         title: title,
         reflection: reflection,
@@ -38,19 +38,21 @@ class expsController {
         .status(500)
         .json({ message: "Error creating experience", error: err.message });
     }
-  };
+  }
 
-  getExps = async (req, res) => {
+  async getExps(req, res) {
     try {
       const userId = req.user.id;
-      const experiences = await Experience.findAll({ where: { userId } });
+      const experiences = await models.Experience.findAll({
+        where: { userId },
+      });
       res.status(200).json(experiences);
     } catch (err) {
       res
         .status(500)
         .json({ message: "Error fetching experiences", error: err.message });
     }
-  };
+  }
 }
 
 export const ExpsController = new expsController();

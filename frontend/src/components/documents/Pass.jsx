@@ -5,11 +5,12 @@ import { FaToggleOn } from "react-icons/fa6";
 import { FaToggleOff } from "react-icons/fa6";
 import { FaPlusCircle } from "react-icons/fa";
 import { useEffect } from "react";
-import { redirect } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const { VITE_API_URL } = import.meta.env;
 
 const Pass = (props) => {
+  const navigate = useNavigate();
   const [error, setError] = useState(null);
 
   const [exps, setExps] = useState([]);
@@ -61,7 +62,7 @@ const Pass = (props) => {
       }
       const data = await response.json();
       console.log("Fetched password:", data);
-      redirect(`/passport/${data.passport.id}`);
+      navigate(`/passport/${data.passport.id}`);
     } catch (err) {
       console.error("Error fetching experiences:", err);
     }

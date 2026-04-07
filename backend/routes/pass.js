@@ -4,9 +4,11 @@ import { PassController } from "../controllers/pass.js";
 
 const router = Router();
 
-router.post("/new-pass", (req, res) => PassController.addPass(req, res));
+router.post("/new-pass", verifyToken, (req, res) =>
+  PassController.addPass(req, res),
+);
 
-router.get("/get-pass/:passId", (req, res) =>
+router.get("/get-pass/:passId", verifyToken, (req, res) =>
   PassController.getPassById(req, res),
 );
 
